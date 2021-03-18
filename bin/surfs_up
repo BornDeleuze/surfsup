@@ -1,0 +1,18 @@
+#!/usr/bin/env/ruby
+
+require 'rexml/document'
+
+include REXML
+require "open-uri"
+require "nokogiri"
+# require "rexml"
+require "pry"
+
+
+require_relative "../lib/cli.rb"
+require_relative "../lib/scraper.rb"
+require_relative "../lib/spots.rb"
+
+Scraper.scrape_spots
+
+# CLI.new.run
