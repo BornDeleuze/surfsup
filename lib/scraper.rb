@@ -21,15 +21,17 @@ class Scraper
         html = open(RELATIVE_URL+spot.station_id+".rss")
         doc = Nokogiri::HTML(html)
         a = []
+        spot.weather_hash={}
         array = doc.css('description').children.text.split("\n        ")
         
         array.each do |string|
             h={}
             x=string.split(": ")
+            spot.weather_hash[x[0]] = x[1]
             h[x[0]] = x[1]
             a << h
         end
-        spot.weather_array=(a)
+        Spots.info_setter(spot)
         puts a
     end
 
