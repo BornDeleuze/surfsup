@@ -6,19 +6,25 @@ class Scraper
         doc = Nokogiri::HTML(html)
         doc.css("div.buoy-summary-container-item").each do |station|
             # binding.pry
+            if station.css("div.buoy-station-id.borderRB").text  == nil ||station.css("div.buoy-name.borderRB").text == "Buoy Name"
+                
+            else
             location = station.css("div.buoy-name.borderRB").text
             station_id = station.css("div.buoy-station-id.borderRB").text
             Spots.new(station_id, location)
+            end
         end
-binding.pry
+
+        
+# binding.pry
     end
 
 
 ###
 RELATIVE_URL = "https://www.ndbc.noaa.gov/data/latest_obs/"
 
-    def self.scrape_spots_details(station_id)
-        html = open(RELATIVE_URL+station_id.rss)
+    def self.scrape_spots_details(spot)
+        html = open(RELATIVE_URL+spot.station_id+".rss")
         doc = Nokogiri::HTML(html)
 
         a = []
@@ -29,8 +35,9 @@ RELATIVE_URL = "https://www.ndbc.noaa.gov/data/latest_obs/"
             x=string.split(": ")
             h[x[0]] = x[1]
             a << h
-
+            # binding.pry
         end
+        puts a
     end
     
 
