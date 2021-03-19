@@ -28,7 +28,4 @@ class Spots
         @@all
     end
 
-
-
-
 end

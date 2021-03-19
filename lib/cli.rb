@@ -30,7 +30,7 @@ class CLI
 
     def get_weather_details(spot)
         Scraper.scrape_spots_details(spot)
-        puts "Here's the local weather info for your spot!"
+        puts "Here's the latest local weather info for your spot!"
         # Spots.good?
         puts "Would you like to check a different location?"
         puts "1. Yes"
