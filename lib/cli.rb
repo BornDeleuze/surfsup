@@ -35,6 +35,7 @@ class CLI
         puts "Would you like to check a different location?"
         puts "1. Yes"
         puts "2. No"
+        binding.pry
         input = gets.chomp
         if input.to_i == 1 
             list_spots
