@@ -1,6 +1,5 @@
 class Scraper
 
-
     def self.scrape_spots
         html = open("http://www.surfline.com/buoy-report/washington_2137/")
         doc = Nokogiri::HTML(html)
@@ -8,9 +7,9 @@ class Scraper
             if station.css("div.buoy-station-id.borderRB").text  == nil ||station.css("div.buoy-name.borderRB").text == "Buoy Name"
                 
             else
-            location = station.css("div.buoy-name.borderRB").text
+            place = station.css("div.buoy-name.borderRB").text
             station_id = station.css("div.buoy-station-id.borderRB").text
-            Spots.new(station_id, location)
+            Spots.new(station_id, place)
             end
         end
     end

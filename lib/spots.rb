@@ -1,12 +1,12 @@
 class Spots
 
-    attr_accessor :station_id, :location, :weather_array, :weather_hash, :status, :dominant_wave_period, :significant_wave_height, :mean_wave_direction
+    attr_accessor :station_id, :place, :weather_array, :weather_hash, :status, :dominant_wave_period, :significant_wave_height, :mean_wave_direction
 
     @@all = []
 
-    def initialize(station_id, location)
+    def initialize(station_id, place)
         @station_id = station_id
-        @location = location
+        @place = place
         @@all << self
         
     end

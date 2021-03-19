@@ -15,7 +15,7 @@ class CLI
         puts "---------------------------------------------------"
         puts " "
         Spots.all.each.with_index(1) do |spot, i|
-            puts "#{i}. #{spot.location}"
+            puts "#{i}. #{spot.place}"
         end
         puts "---------------------------------------------------"
     end
@@ -39,7 +39,7 @@ class CLI
         Scraper.scrape_spots_details(spot)
         puts " "
         puts "---------------------------------------------------"
-        puts "Here's the latest local weather info for your spot!"
+        puts "Here's the latest local weather info for #{spot.place}!"
         Spots.spot_good?(spot)
         puts "Would you like to check a different location?"
         puts "1. Yes"
