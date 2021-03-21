@@ -18,6 +18,6 @@ The weather stations are maintained by NOAA.gov
 
 BACKGROUND 
 
-This application was the first application I ever wrote, and was created as my first project at Flatiron School in the software development course.
+This application was the first application I ever wrote, and was created as my first project at Flatiron School in the software engineering course.
 
 THANKS!  
