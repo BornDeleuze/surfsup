@@ -1,6 +1,7 @@
 Hello!
 
 BRIEF
+
 This app is a simple command line application that gathers a list of weather stations in the North Pacific and allows users to access weather information from those stations.
 
 DESCRIPTION
