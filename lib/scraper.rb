@@ -1,4 +1,4 @@
-class Scraper
+class Scraper 
 
     def self.scrape_spots
         html = open("http://www.surfline.com/buoy-report/washington_2137/")

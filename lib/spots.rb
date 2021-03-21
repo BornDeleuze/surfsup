@@ -1,4 +1,4 @@
-class Spots
+class Spots 
 
     attr_accessor :station_id, :place, :weather_array, :weather_hash, :status, :dominant_wave_period, :significant_wave_height, :mean_wave_direction
 
@@ -11,6 +11,10 @@ class Spots
         
     end
 
+    def self.info_setter(spot)
+        spot.info_setter
+    end
+
     def info_setter
         self.weather_hash.each do |key, value| 
             if value != nil
@@ -19,10 +23,6 @@ class Spots
               self.send(("#{good_key}="), value)
             end
         end
-    end
-
-    def self.info_setter(spot)
-        spot.info_setter
     end
 
     def spot_good?
