@@ -24,11 +24,8 @@ class Scraper
         array = doc.css('description').children.text.split("\n        ")
         
         a = array.collect do |string|
-            # h={}
             x=string.delete("]]>").strip.split(": ")
             weather_hash[x[0]] = x[1]
-            # h[x[0]] = x[1]
-            # a << h
         end
 
         weather_hash.each do |key, value| 
