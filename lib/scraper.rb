@@ -4,7 +4,7 @@ class Scraper
         html = open("http://www.surfline.com/buoy-report/washington_2137/")
         doc = Nokogiri::HTML(html)
         doc.css("div.buoy-summary-container-item").each do |station|
-            if station.css("div.buoy-station-id.borderRB").text  == nil ||station.css("div.buoy-name.borderRB").text == "Buoy Name"
+            if station.css("div.buoy-station-id.borderRB").text  == nil || station.css("div.buoy-name.borderRB").text == "Buoy Name"
                 
             else
             place = station.css("div.buoy-name.borderRB").text
@@ -19,19 +19,25 @@ class Scraper
     def self.scrape_spots_details(spot)
         html = open(RELATIVE_URL+spot.station_id+".rss")
         doc = Nokogiri::HTML(html)
-        a = []
-        spot.weather_hash={}
+        # a = []
+        weather_hash={}
         array = doc.css('description').children.text.split("\n        ")
         
-        array.each do |string|
-            h={}
-            x=string.split(": ")
-            spot.weather_hash[x[0]] = x[1]
-            h[x[0]] = x[1]
-            a << h
+        a = array.collect do |string|
+            # h={}
+            x=string.delete("]]>").strip.split(": ")
+            weather_hash[x[0]] = x[1]
+            # h[x[0]] = x[1]
+            # a << h
         end
-        Spots.info_setter(spot)
-        puts a
+
+        weather_hash.each do |key, value| 
+            if value != nil
+                good_key = key.downcase.tr(" ", "_")
+                spot.class.attr_accessor(good_key)
+                spot.send(("#{good_key}="), value)
+            end
+        end
     end
 
 end

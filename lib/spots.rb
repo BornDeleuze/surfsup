@@ -1,58 +1,22 @@
 class Spots 
 
-    attr_accessor :station_id, :place, :weather_array, :weather_hash, :status, :dominant_wave_period, :significant_wave_height, :mean_wave_direction
+    attr_accessor :station_id, :place, :status, :dominant_wave_period, :significant_wave_height, :mean_wave_direction, :wind_direction, :wind_gust, :air_temperature, :water_temperature, :wind_speed
 
     @@all = []
 
-    def initialize(station_id, place)
+    def initialize(station_id, place, significant_wave_height=nil, dominant_wave_period=nil, mean_wave_direction=nil, wind_direction=nil, wind_gust=nil, air_temperature=nil, water_temperature=nil, wind_speed=nil, status=nil)
         @station_id = station_id
         @place = place
+        @significant_wave_height = significant_wave_height
+        @dominant_wave_period = dominant_wave_period
+        @mean_wave_direction = mean_wave_direction
+        @wind_direction = wind_direction
+        @wind_gust = wind_gust
+        @air_temperature = air_temperature
+        @water_temperature = water_temperature
+        @status = status
         @@all << self
         
-    end
-
-    def self.info_setter(spot)
-        spot.info_setter
-    end
-
-    def info_setter
-        self.weather_hash.each do |key, value| 
-            if value != nil
-              good_key = key.downcase.tr(" ", "_")
-              self.class.attr_accessor(good_key)
-              self.send(("#{good_key}="), value)
-            end
-        end
-    end
-
-    def spot_good?
-        if self.significant_wave_height != nil && self.dominant_wave_period != nil
-            @status= "We've got no data on waves here, sorry!"
-            wave_height = self.significant_wave_height.delete("^0-9").to_i
-            period = self.dominant_wave_period.delete("^0-9").to_i
-
-            if wave_height > 80 || period > 20
-                status = "DUDE IT IS FIRING HERE! BE CAREFUL! NO KOOKS ALLOWED!"
-            elsif wave_height > 30 || period > 12
-                status = "You could be shredding these! Looks like fun waves!"   
-            elsif wave_height != nil
-                status = "bummer, doesn't seem ridable here."
-            end
-
-            if self.location == "GRAYS HARBOR" || self.location == "CAPE ELIZABETH"
-                if self.mean_wave_direction.delete("^0-9").to_i > 275 && wave_height > 60
-                    puts "It might even be going off in the Straight!!!"
-                end
-            end
-
-            puts " "
-            puts status
-            puts " "
-        end
-    end
-
-    def self.spot_good?(spot)
-        spot.spot_good?
     end
 
     def self.all
